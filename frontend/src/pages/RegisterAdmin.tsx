@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AuthService from '../services/authService';
+import adminAuthService from '../services/adminAuthService';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -9,17 +9,17 @@ type RegisterForm = {
   email: string;
   password: string;
   confirmPassword: string;
-  role: string;
+
 };
 
-const RegisterPage: React.FC = () => {
+const RegisterAdmin: React.FC = () => {
   const [formData, setFormData] = useState<RegisterForm>({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
-    role: 'donor' // Default role
+    // Default role
   });
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -41,7 +41,7 @@ const RegisterPage: React.FC = () => {
     }
 
     try {
-      const response = await AuthService.register(formData);
+      const response = await adminAuthService.createAdmin(formData);
       toast.success(response.message || 'Registration successful.');
       setMessage(response.message || 'Registration successful.');
     } catch (err: any) {
@@ -132,7 +132,7 @@ const RegisterPage: React.FC = () => {
               required
             />
           </div>
-          <div>
+          {/* <div>
             <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-1">
               I am registering as a:
             </label>
@@ -148,7 +148,7 @@ const RegisterPage: React.FC = () => {
               <option value="beneficiary">Program Beneficiary</option>
               <option value="partner">Partner Organization</option>
             </select>
-          </div>
+          </div> */}
           <div className="flex items-center">
             <input
               id="terms"
@@ -172,7 +172,7 @@ const RegisterPage: React.FC = () => {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Already have an account?{' '}
-            <a href="/login" className="text-blue-600 hover:underline">
+            <a href="/admin-login" className="text-blue-600 hover:underline">
               Sign in here
             </a>
           </p>
@@ -182,4 +182,4 @@ const RegisterPage: React.FC = () => {
   );
 };
 
-export default RegisterPage;
+export default RegisterAdmin;

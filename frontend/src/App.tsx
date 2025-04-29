@@ -9,10 +9,13 @@ import StoriesPage from './pages/StoriesPage';
 import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import RegisterAdmin from './pages/RegisterAdmin'
 import AdminDashboardPage from './pages/AdminDashboardPage';
+import AdminLogin from "./pages/AdminLogin"
 import UserProfilePage from './pages/UserProfilePage';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
+import ProtectedAdminRoute from './components/ProtectedRoute/ProtectedAdminRoute';
 
 function App() {
   return (
@@ -30,9 +33,20 @@ function App() {
             <Route path="/stories" element={<StoriesPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/admin-login" element={<AdminLogin />} />
+          
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/register-admin" element={<RegisterAdmin />} />
             {/* Add protected routes for admin and user profiles later */}
-            <Route path="/admin" element={<AdminDashboardPage />} />
+            
+            <Route
+               path="/admin"
+                element={
+              <ProtectedAdminRoute>
+                <AdminDashboardPage />
+              </ProtectedAdminRoute>
+             }
+              />
             <Route path="/profile" element={<UserProfilePage />} />
           </Routes>
         </main>
