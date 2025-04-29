@@ -5,7 +5,7 @@ const adminAuthService = {
   // Register a new user
   createAdmin: async (userData) => {
     try {
-      const response = await API.post('/auth/createAdmin', userData);
+      const response = await API.post('/AdminAuth/createAdmin', userData);
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -17,9 +17,9 @@ const adminAuthService = {
   },
 
   // Login a user
-  login: async (credentials) => {
+  Adminlogin: async (credentials) => {
     try {
-      const response = await API.post('/auth/login', credentials);
+      const response = await API.post('/AdminAuth/Adminlogin', credentials);
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -37,27 +37,38 @@ const adminAuthService = {
     return { success: true, message: 'Logged out successfully' };
   },
 
-  // Get current user info
-  getCurrentUser: () => {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
+// Get current user info
+getCurrentUser: () => {
+    try {
+      const user = localStorage.getItem('user');
+      if (!user) return null;
+  
+      const parsedUser = JSON.parse(user);
+  
+      // Optional: Validate structure (e.g., must have id, role)
+      if (!parsedUser.id || !parsedUser.role) {
+        console.warn("Invalid user object in storage. Clearing.");
+        localStorage.removeItem('user');
+        return null;
+      }
+  
+      return parsedUser;
+    } catch (e) {
+      console.error("Error parsing user from localStorage:", e);
+      localStorage.removeItem('user'); // Clear corrupted data
+      return null;
+    }
   },
-
-  // Check if user is logged in
-  isLoggedIn: () => {
-    return !!localStorage.getItem('token');
-  },
-
-  // Check if user has a specific role
-  hasRole: (role) => {
-    const user = AuthService.getCurrentUser();
-    return user && user.role === role;
+  // Get last login timestamp
+  lastLogin: () => {
+    const user = adminAuthService.getCurrentUser();
+    return user?.lastLogin || null;
   },
 
   // Refresh user profile data
   refreshUserProfile: async () => {
     try {
-      const response = await API.get('/auth/me');
+      const response = await API.get('/auth/getAdmin');
       if (response.data.user) {
         localStorage.setItem('user', JSON.stringify(response.data.user));
       }

@@ -1,19 +1,42 @@
 import React, { useState } from 'react';
-
+import adminAuthService from '../services/adminAuthService';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 const AdminLoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); 
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // This will be connected to the backend authentication API
-    console.log('Login attempt with:', { email, password });
+
+    try {
+      const result = await adminAuthService.Adminlogin({ email, password });
+          // Check if the logged-in user is actually an admin
+    const user = result?.user;
+    if (user?.role !== 'admin') {
+      toast.error('Access denied: You are not an admin.');
+      // Optionally clear stored user/token to prevent misuse
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      return;
+    }
+      toast.success('Login successful!');
+      setTimeout(() => navigate('/admin'), 1500);
+      // Optionally redirect after login:
+      // navigate('/admin-dashboard');
+    } catch (error: any) {
+      const errorMsg = error?.message || 'Login failed. Please try again.';
+      toast.error(errorMsg);
+    }
   };
 
   return (
     <div className="max-w-md mx-auto">
+      <ToastContainer /> {/* This ensures toasts are shown */}
       <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
-      
+
       <div className="bg-white p-8 rounded-lg shadow-md">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -29,7 +52,7 @@ const AdminLoginPage: React.FC = () => {
               required
             />
           </div>
-          
+
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
               Password
@@ -43,7 +66,7 @@ const AdminLoginPage: React.FC = () => {
               required
             />
           </div>
-          
+
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
@@ -55,14 +78,14 @@ const AdminLoginPage: React.FC = () => {
                 Remember me
               </label>
             </div>
-            
+
             <div className="text-sm">
               <a href="#" className="text-blue-600 hover:underline">
                 Forgot your password?
               </a>
             </div>
           </div>
-          
+
           <div>
             <button
               type="submit"
@@ -72,7 +95,7 @@ const AdminLoginPage: React.FC = () => {
             </button>
           </div>
         </form>
-        
+
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Don't have an account?{' '}

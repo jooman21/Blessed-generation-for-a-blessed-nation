@@ -1,13 +1,17 @@
-// components/ProtectedAdminRoute.tsx
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import AuthService from '../../services/adminAuthService';
+import adminAuthService from '../../services/adminAuthService';
 
-const ProtectedAdminRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const isLoggedIn = AuthService.isLoggedIn();
-  const isAdmin = AuthService.hasRole('admin');
+interface Props {
+  children: JSX.Element;
+}
 
-  if (!isLoggedIn || !isAdmin) {
+const ProtectedAdminRoute: React.FC<Props> = ({ children }) => {
+  const user = adminAuthService.getCurrentUser();
+  const lastLogin = user?.lastLogin;
+  const isAdmin = user?.role === 'admin';
+
+  if (!lastLogin || !isAdmin) {
     return <Navigate to="/admin-login" replace />;
   }
 

@@ -37,6 +37,8 @@ function App() {
           
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/register-admin" element={<RegisterAdmin />} />
+            {/* <Route path="/admin" element={ <AdminDashboardPage />} /> */}
+                         
             {/* Add protected routes for admin and user profiles later */}
             
             <Route

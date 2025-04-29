@@ -36,7 +36,8 @@ const authenticate = async (req, res, next) => {
     
     // Attach user to request object
     // req.user = user;
-    req.userId = decoded.id; // Temporary solution until User model is created
+    req.userId = decoded.id; 
+    req.role = decoded.role; // Temporary solution until User model is created
     
     next();
   } catch (error) {

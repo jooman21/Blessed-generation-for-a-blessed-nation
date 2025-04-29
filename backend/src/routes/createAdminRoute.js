@@ -1,17 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const authController = require('../controllers/createAdmin');
+const authenticate = require("../middleware/authenticate");
+const createAdminController = require('../controllers/createAdminController');
 
-// POST /api/auth/register - Register a new user
-router.post('/createAdmin', createAdmin.createAdmin);
+// POST /api/auth/createAdmin - Register a new admin
+router.post('/createAdmin', createAdminController.createAdmin);
 
-// POST /api/auth/login - Login a user
-router.post('/Adminlogin', authController.login);
+// POST /api/auth/login - Login an admin
+router.post('/Adminlogin', createAdminController.Adminlogin);
 
-// GET /api/auth/me - Get current user info (protected route)
-router.get('/me', authController.getMe);
+// GET /api/auth/me - Get current admin info (protected route)
+router.get('/getAdmin',authenticate, createAdminController.getAdmin);
 
-// POST /api/auth/logout - Logout a user
-router.post('/logout', authController.logout);
+// POST /api/auth/logout - Logout an admin
+router.post('/logout', createAdminController.logout);
 
 module.exports = router;

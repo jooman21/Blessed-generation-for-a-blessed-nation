@@ -3,7 +3,7 @@ const User = db.User;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// Register a new user
+// Register a admin user
 exports.createAdmin = async (req, res, next) => {
   try {
     const { firstName, lastName, email, password, role } = req.body;
@@ -20,7 +20,7 @@ exports.createAdmin = async (req, res, next) => {
       lastName,
       email,
       password,
-      role: role || "admin", // Default to donor if not provided
+      role: role || "admin", // Default to admin if not provided
     });
 
     // Generate JWT token
@@ -78,7 +78,13 @@ exports.Adminlogin = async (req, res, next) => {
       success: true, 
       message: "Login successful.", 
       token, 
-      user: userResponse 
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        lastLogin: user.lastLogin // ✅ Make sure this is included!
+      }
     });
 
   } catch (error) {
@@ -87,15 +93,14 @@ exports.Adminlogin = async (req, res, next) => {
 };
 
 // Get current user information (requires authentication middleware)
-exports.getMe = async (req, res, next) => {
+exports.getAdmin = async (req, res, next) => {
   try {
-    // The authenticate middleware should have attached userId to req
-    if (!req.userId) {
-      return res.status(401).json({ success: false, message: "Authentication required." });
+    if (!req.userId || req.role !== "admin") {
+      return res.status(403).json({ success: false, message: "Access denied. Admins only." });
     }
 
     const user = await User.findByPk(req.userId, {
-      attributes: { exclude: ["password"] } // Exclude password from the result
+      attributes: { exclude: ["password"] }
     });
 
     if (!user) {
@@ -108,6 +113,7 @@ exports.getMe = async (req, res, next) => {
     next(error);
   }
 };
+
 
 // Logout a user (JWT is stateless, so logout is typically handled client-side by removing the token)
 // This endpoint can be used for blacklisting tokens if needed, but is often just a confirmation.

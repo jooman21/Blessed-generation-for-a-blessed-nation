@@ -14,9 +14,10 @@ const teamRoutes = require("./teamRoutes");
 const partnerRoutes = require("./partnerRoutes");
 const contactRoutes = require("./contactRoutes");
 const faqRoutes = require("./faqRoutes");
-
+const createAdminRoute = require("./createAdminRoute");
 // Mount all routes
 router.use("/auth", authRoutes);
+router.use("/AdminAuth", createAdminRoute);
 router.use("/users", userRoutes);
 router.use("/projects", projectRoutes);
 router.use("/news", newsRoutes);
