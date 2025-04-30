@@ -1,5 +1,8 @@
 import React from 'react';
 import OurImpactSection from '../pages/OurImpactSection'
+import ImpactStats from '../pages/ImpactStats'
+
+
 
 const HomePage: React.FC = () => {
   return (
@@ -69,7 +72,15 @@ const HomePage: React.FC = () => {
           </p>
         </div>
       </section>
-
+      <section className="bg-white text-white py-8 mt-auto">
+        {/* <LatestNewsSection/> */}
+        <ImpactStats />
+        <div className="max-w-5xl mx-auto px-4">
+          <p className="text-lg text-gray-700">
+           
+          </p>
+        </div>
+      </section>
   
     </div>
   );

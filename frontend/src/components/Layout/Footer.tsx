@@ -7,9 +7,9 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About Section */}
           <div>
-            <h3 className="text-xl font-semibold mb-4">About NGO Name</h3>
+            <h3 className="text-xl font-semibold mb-4">Blessed generation for a blessed nation</h3>
             <p className="text-gray-400">
-              Brief description of the NGO and its mission. Making a difference one step at a time.
+            "Empowering a blessed generation to build a prosperous and purpose-driven nation."
             </p>
           </div>
           

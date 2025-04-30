@@ -6,9 +6,9 @@ const impactData = [
     bg: "bg-orange-100",
     title: "Short-Long-term projects",
     items: [
-      "Largest Job Board",
-      "Profile Exposure",
-      "CV Tailoring"
+      "School Construction",
+      "Health Centers",
+      "Water Access"
     ]
   },
   {
@@ -36,8 +36,8 @@ const impactData = [
     bg: "bg-pink-100",
     title: "Potential Partners",
     items: [
-      "Past project Experience",
-      "Call for partnerships service",
+      "Ethio Telecom",
+      "Prime Minster Office",
       "Competitor's analysis"
     ]
   },

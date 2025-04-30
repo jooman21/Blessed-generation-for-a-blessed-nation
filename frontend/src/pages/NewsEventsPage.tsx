@@ -1,8 +1,17 @@
 import React from 'react';
-
+import LatestNewsSection from '../pages/LatestNewsSection'
 const NewsEventsPage: React.FC = () => {
   return (
     <div>
+        <section className="bg-white text-white py-8 mt-auto">
+        {/* <LatestNewsSection/> */}
+        <LatestNewsSection />
+        <div className="max-w-5xl mx-auto px-4">
+          <p className="text-lg text-gray-700">
+           
+          </p>
+        </div>
+      </section>
       <h1 className="text-3xl font-bold mb-4">News & Events</h1>
       <p className="mb-6">Stay updated with the latest news from our NGO and find information about upcoming events like fundraisers and volunteer activities.</p>
 
