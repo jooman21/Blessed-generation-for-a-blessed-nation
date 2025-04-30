@@ -22,6 +22,13 @@ const AdminLoginPage: React.FC = () => {
       localStorage.removeItem('user');
       return;
     }
+    if(user?.password != password){
+      toast.error('Access denied: Password is not correct')
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      return;
+    }
+      
       toast.success('Login successful!');
       setTimeout(() => navigate('/admin'), 1500);
       // Optionally redirect after login:
