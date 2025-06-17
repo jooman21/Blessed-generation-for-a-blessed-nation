@@ -1,36 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import OurImpactSection from '../pages/OurImpactSection'
 import ImpactStats from '../pages/ImpactStats'
-
+import LatestNewsSection from '../pages/LatestNewsSection'
+import GlobalConnections from './GlobalConnections';
 
 
 const HomePage: React.FC = () => {
+  const images = [
+    '/firstlady/zinash helping.jpg', // Your original image
+    '/firstlady/zinash achievement.jpg', // Placeholder for image 2
+    '/firstlady/Charity work.jpg', // Placeholder for image 3
+  ];
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [images.length]);
+
   return (
     <div className="relative min-h-screen flex flex-col">
       {/* Background image and overlay: covers header + hero */}
       <div
-        className="absolute top-0 left-0 w-full h-[700px] md:h-[70vh] z-1"
+        className="absolute top-20 left-0 w-full h-[700px] md:h-[70vh] z-1 transition-opacity duration-1000 ease-in-out"
         style={{
-          backgroundImage: "url('/firstlady/zinash helping.jpg')",
+          backgroundImage: `url('${images[currentImageIndex]}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       />
-      <div className="absolute top-0 left-0 w-full h-[700px] md:h-[70vh] bg-blue-900 bg-opacity-60 z-0"></div>
+      <div className="absolute top-20 left-0 w-full h-[700px] md:h-[70vh] bg-blue-900 bg-opacity-50 z-0"></div>
 
       {/* Transparent Header overlays the image */}
    
       {/* Hero Section: Full width, no white space */}
       <section className="relative w-full min-h-[600px] md:min-h-[70vh] flex items-center justify-center overflow-hidden p-0 m-0">
         {/* Foreground content */}
-        <div className="relative z-10 flex flex-col md:flex-row w-full px-8 py-12">
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 w-full py-12 px-4 sm:px-6 lg:px-8">
           {/* Left: Description */}
-          <div className="flex-1 flex flex-col justify-center text-white md:pr-16 mb-8 md:mb-0">
+          <div className="flex flex-col justify-center text-white md:pr-8 pl-10">
             <h2 className="text-5xl font-bold mb-6 leading-tight">
             Empowering the Next Generation to Uplift the Nation
             </h2>
-            <p className="mb-8 text-lg">
-            We empower communities by investing in the next generation through education and sustainable development. From building schools and strengthening local infrastructure to providing access to clean water, healthcare, and vocational training — our mission is to uplift underserved areas and create lasting change. By equipping youth and communities with the resources they need, we’re laying the foundation for a truly blessed nation.
+            <p className="mb-8 text-lg md:pr-8">
+            We empower communities by investing in the next generation through education and sustainable development. From building schools and strengthening local infrastructure to providing access to clean water, healthcare, and vocational training — our mission is to uplift underserved areas and create lasting change. By equipping youth and communities with the resources they need, we're laying the foundation for a truly blessed nation.
             </p>
             <a href="#" className="text-white font-semibold underline hover:text-yellow-400">
               Learn more about us &rarr;
@@ -38,16 +55,13 @@ const HomePage: React.FC = () => {
           </div>
 
           {/* Right: Registration Form Card */}
-          <div className="flex-1 flex justify-center">
+          <div className="flex justify-end pr-4 md:pr-16">
             <div className="bg-white bg-opacity-90 rounded-xl shadow-lg p-8 w-full max-w-md">
               <h3 className="text-2xl font-bold text-center mb-2 text-gray-800">Register for free</h3>
               <p className="text-center text-gray-600 mb-6 text-sm">
                 Get started by selecting one of the options below
               </p>
               <div className="space-y-4">
-                <button className="w-full flex items-center justify-center border border-gray-200 rounded-lg py-4 text-blue-500 font-semibold text-lg hover:bg-blue-50 transition">
-                  Individual
-                </button>
                 <button className="w-full flex items-center justify-center border border-gray-200 rounded-lg py-4 text-blue-500 font-semibold text-lg hover:bg-blue-50 transition">
                   Organization
                 </button>
@@ -62,6 +76,8 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+     
 
       {/* Other sections/components can go here */}  
       <section className="bg-white text-white py-8 mt-auto">
@@ -81,7 +97,12 @@ const HomePage: React.FC = () => {
           </p>
         </div>
       </section>
-  
+      <div>
+      <GlobalConnections />
+      </div>
+        <div>
+          <LatestNewsSection/>
+        </div>
     </div>
   );
 };

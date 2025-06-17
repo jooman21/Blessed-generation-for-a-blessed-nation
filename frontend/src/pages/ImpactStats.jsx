@@ -9,13 +9,15 @@ export default function ImpactStats() {
     threshold: 0.3,
   });
 
+  console.log('ImpactStats inView:', inView);
+
   // Safeguard: Make sure stats is an array
   const safeStats = Array.isArray(stats) ? stats : [];
 
   return (
     <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 text-center text-white">
       {safeStats.map((stat, idx) => (
-        <div key={idx} className={`py-12 ${stat.bgColor || ''}`}>
+        <div key={idx} className={`py-12 rounded-lg ${stat.bgColor || ''}`}>
           <div className="text-4xl font-bold">
             {inView ? (
               <CountUp

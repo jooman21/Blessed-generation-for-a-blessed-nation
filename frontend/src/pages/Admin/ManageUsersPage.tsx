@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { UserService } from '../../services'; // Assuming index.js exports services
+import userService  from '../../services'; // Assuming index.js exports services
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Trash2, Edit, KeyRound } from 'lucide-react';

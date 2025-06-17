@@ -55,7 +55,8 @@ const AppContent = () => {
       ) : (
         <div className="flex flex-col min-h-screen">
           <Header />
-          <main className="flex-grow container mx-auto px-4 py-8">
+          {/* <main className="flex flex-col min-h-screen"> */}
+          <main className="flex-grow w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 py-4">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />

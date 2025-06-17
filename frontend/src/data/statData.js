@@ -2,18 +2,18 @@ export const stats = [
     {
       number: 455,
       label: 'FEEDEED HOMELESS',
-      bgColor: 'bg-green-700',
+      bgColor: 'bg-[#005073]',
     },
     {
       number: 85,
       label: 'BUILD SHELTERS',
-      bgColor: 'bg-yellow-400',
+      bgColor: 'bg-orange-500',
     },
     {
       number: 150,
       label: 'Health Center',
       prefix: '$',
-      bgColor: 'bg-red-700',
+      bgColor: 'bg-[#006d9e]',
     },
   ];
   
