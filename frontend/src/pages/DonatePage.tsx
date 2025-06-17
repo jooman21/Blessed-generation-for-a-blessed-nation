@@ -68,6 +68,15 @@ const DonatePage: React.FC = () => {
                 <input type="email" className="w-full p-2 border border-gray-300 rounded" />
               </div>
               <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Select Project</label>
+                <select className="w-full p-2 border border-gray-300 rounded">
+                  <option value="">-- Select a project --</option>
+                  <option value="project1">School Project</option>
+                  <option value="project2">Water Project</option>
+                  <option value="project3">Green LEGACY</option>
+                </select>
+              </div>
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Phone (Optional)</label>
                 <input type="tel" className="w-full p-2 border border-gray-300 rounded" />
               </div>
@@ -78,10 +87,8 @@ const DonatePage: React.FC = () => {
               <h3 className="font-medium mb-2">Payment Information</h3>
               <p className="text-sm text-gray-600 mb-2">Secure payment processing will be integrated here.</p>
               <div className="flex space-x-2">
-                <div className="w-8 h-5 bg-gray-300 rounded"></div>
-                <div className="w-8 h-5 bg-gray-300 rounded"></div>
-                <div className="w-8 h-5 bg-gray-300 rounded"></div>
-                <div className="w-8 h-5 bg-gray-300 rounded"></div>
+                <img src="/logo/telebirr.png" alt="Telebirr" className="w-24 h-12 object-contain rounded" />
+                <img src="/logo/CBE.jpg" alt="CBE" className="w-24 h-12 object-contain rounded" />
               </div>
             </div>
             

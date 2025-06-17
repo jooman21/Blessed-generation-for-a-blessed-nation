@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthService } from '../../services'; // Assuming index.js exports services
+// import { AuthService } from '../../services'; // Assuming index.js exports services
 import { Button } from "@/components/ui/button"; // Using shadcn/ui button
 import { LogOut } from 'lucide-react';
 
@@ -8,14 +8,14 @@ const AdminNavbar: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    AuthService.logout();
+    // AuthService.logout();
     navigate('/login'); // Redirect to login page after logout
   };
 
   return (
-    <header className="bg-white shadow-md h-16 flex items-center justify-between px-6">
+    <header className="bg-[#005073] shadow-md h-16 flex items-center justify-between px-6">
       {/* Title - Can be dynamic based on the current page if needed */}
-      <h1 className="text-xl font-semibold text-gray-700">Admin Dashboard</h1>
+      <h1 className="text-xl font-semibold text-gray-black"> Blessed generation for a blessed nation Admin Dashboard</h1>
 
       {/* Logout Button */}
       <Button variant="outline" size="sm" onClick={handleLogout}>

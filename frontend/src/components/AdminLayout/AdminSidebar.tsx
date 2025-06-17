@@ -35,7 +35,7 @@ const AdminSidebar: React.FC = () => {
   };
 
   return (
-    <aside className="w-64 bg-gray-800 text-white flex flex-col">
+    <aside className="w-64 bg-[#005073] text-white flex flex-col">
       {/* User Info */}
       <div className="p-4 border-b border-gray-700">
         <h2 className="text-lg font-semibold">Admin Panel</h2>

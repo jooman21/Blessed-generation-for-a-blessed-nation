@@ -1,65 +1,71 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+const infoCards = [
+  {
+    title: 'ABOUT',
+    to: '/about',
+    image: '/firstlady/Charity work.jpg',
+    content:
+      'First Lady Zinash Tayachew was born on January 13, 1978, in the historic and royal city of Gondar, Ethiopia. After completing her studies, she served in the military where she met her husband, Prime Minister Abiy Ahmed Ali.',
+  },
+  {
+    title: 'WHAT WE DO',
+    to: '/what-we-do',
+    image: '/firstlady/zinash meet.jpg',
+    content:
+      'The Office of the First Lady leads charitable initiatives—from education and healthcare to women and child empowerment—building a more inclusive future in collaboration with partners.',
+  },
+  {
+    title: 'PROJECTS',
+    to: '/projects',
+    image: '/firstlady/blind boarding school.jpg',
+    content: (
+      <ul className="list-disc pl-4 text-sm text-gray-600 space-y-2">
+        <li>
+          <strong>Education for All:</strong> Building and supporting schools in under-served communities.
+        </li>
+        <li>
+          <strong>Charity Outreach Programs:</strong> Distributing essentials to families in need.
+        </li>
+        <li>
+          <strong>Community Development:</strong> Launching clean water and rural support projects.
+        </li>
+      </ul>
+    ),
+  },
+];
 
 const InfoSection = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-center items-start gap-6 p-6 bg-white">
-      {/* ABOUT Section */}
-      <div className="flex-1 max-w-sm bg-yellow-400 text-white rounded-lg overflow-hidden shadow-lg">
-        <div className="h-64 bg-gray-200"><img src="public\firstlady\Charity work.jpg" alt="" /></div>
-        <div className="p-6">
-          <h2 className="text-2xl font-bold text-center mb-4">ABOUT</h2>
-          <p className="text-sm mb-6">
-            First Lady Zinash Tayachew was born on January 13, 1978, in the historic and royal city of Gondar, Ethiopia. 
-            Upon graduation from Fasiledes Secondary School in Gondar, Zinash Tayachew joined military service where she would meet her future husband, 
-            the current Prime Minister of Ethiopia, Abiy Ahmed Ali. Prior to her role as the First Lady, Zinash Tayachew lived in exile with their three daughters in Denver, Colorado.
-          </p>
-          <button className="bg-white text-purple-500 px-4 py-2 rounded shadow hover:bg-purple-100 transition w-full">
-            ➝ GO TO PAGE
-          </button>
-        </div>
-      </div>
+    <section className="pt-24 pb-10 px-4 md:px-8 lg:px-16 bg-gray-50">
+      <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">Who We Are & What We Do</h2>
+      <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
+        Explore the vision, mission, and transformative projects led by the Office of the First Lady.
+      </p>
 
-      {/* WHAT WE DO Section */}
-      <div className="flex-1 max-w-sm bg-yellow-400 text-white rounded-lg overflow-hidden shadow-lg">
-        <div className="h-64 bg-gray-200"><img src="public\firstlady\zinash meet.jpg" alt="" /></div>
-        <div className="p-6">
-          <h2 className="text-2xl font-bold text-center mb-4">WHAT WE DO</h2>
-          <p className="text-sm mb-6">
-            Guided by compassion and a commitment to uplift communities, the Office of the First Lady leads a range of charitable and philanthropic initiatives 
-            that touch lives and inspire change. From supporting education and healthcare to empowering women and children, 
-            we work hand in hand with local and global partners to build a brighter, more inclusive future for all.
-          </p>
-          <button className="bg-white text-sky-500 px-4 py-2 rounded shadow hover:bg-sky-100 transition w-full">
-            ➝ GO TO PAGE
-          </button>
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {infoCards.map((card, index) => (
+          <Link
+            to={card.to}
+            key={index}
+            className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 block"
+          >
+            <div className="h-48 w-full bg-gray-100 flex items-center justify-center">
+              <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
+            </div>
+            <div className="p-4">
+              <h3 className="text-lg font-semibold text-gray-800">{card.title}</h3>
+              {typeof card.content === 'string' ? (
+                <p className="text-sm text-gray-600 mt-2">{card.content}</p>
+              ) : (
+                <div className="mt-2">{card.content}</div>
+              )}
+            </div>
+          </Link>
+        ))}
       </div>
-
-      {/* PROJECTS Section */}
-      <div className="flex-1 max-w-sm bg-yellow-400 text-white rounded-lg overflow-hidden shadow-lg">
-        <div className="h-64 bg-gray-200"><img src="public\firstlady\blind boarding school.jpg" alt=""  /></div>
-        <div className="p-6">
-          <h2 className="text-2xl font-bold text-center mb-4">PROJECTS</h2>
-          <ul className="text-sm list-none space-y-2 mb-6">
-            <li>
-              📚 <strong>Education for All</strong><br />
-              Building and supporting schools in under-served communities to ensure every child has access to quality education.
-            </li>
-            <li>
-              💖 <strong>Charity Outreach Programs</strong><br />
-              Providing food, clothing, and essential supplies to families in need through regular charitable drives.
-            </li>
-            <li>
-              🌿 <strong>Community Development</strong><br />
-              Launching clean water projects, sanitation improvements, and infrastructure support for rural communities.
-            </li>
-          </ul>
-          <button className="bg-white text-green-600 px-4 py-2 rounded shadow hover:bg-green-100 transition w-full">
-            ➝ GO TO PAGE
-          </button>
-        </div>
-      </div>
-    </div>
+    </section>
   );
 };
 
