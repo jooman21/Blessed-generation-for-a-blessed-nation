@@ -1,98 +1,98 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.2,
+      duration: 0.7,
+      ease: 'easeOut',
+    },
+  },
+};
 
 const VolunteerPage: React.FC = () => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-4">Volunteer Opportunities</h1>
-      <p className="mb-6">Find ways to get involved and make a difference. Browse our current volunteer needs and sign up for opportunities that match your skills and availability.</p>
+    <motion.div
+      className="pt-32 px-4 max-w-7xl mx-auto"
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={fadeInUp}
+    >
+      <h1 className="text-4xl font-extrabold text-gray-800 mb-4 text-center">
+        Volunteer Opportunities
+        <div className="w-24 h-1 bg-blue-500 mt-2 mx-auto"></div>
+      </h1>
 
       {/* Filters Section */}
-      <div className="bg-gray-100 p-4 rounded-lg mb-6">
-        <h2 className="text-xl font-semibold mb-2">Filter Opportunities</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Type of Work</label>
-            <select className="w-full p-2 border border-gray-300 rounded">
-              <option value="">All Types</option>
-              <option value="event-support">Event Support</option>
-              <option value="admin">Administrative</option>
-              <option value="field-work">Field Work</option>
-              <option value="fundraising">Fundraising</option>
-              <option value="mentoring">Mentoring</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
-            <select className="w-full p-2 border border-gray-300 rounded">
-              <option value="">All Locations</option>
-              <option value="on-site">On-site</option>
-              <option value="remote">Remote</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Time Commitment</label>
-            <select className="w-full p-2 border border-gray-300 rounded">
-              <option value="">Any Commitment</option>
-              <option value="short-term">Short-term (Days/Weeks)</option>
-              <option value="long-term">Long-term (Months)</option>
-              <option value="flexible">Flexible</option>
-            </select>
-          </div>
+      <motion.div 
+        className="bg-gray-100 p-6 rounded-xl shadow-lg mb-10"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+      >
+        <h2 className="text-2xl font-semibold mb-4 text-blue-800">Filter Opportunities</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { label: 'Type of Work', options: ['All Types', 'Event Support', 'Administrative', 'Field Work', 'Fundraising', 'Mentoring'] },
+            { label: 'Location', options: ['All Locations', 'On-site', 'Remote'] },
+            { label: 'Time Commitment', options: ['Any Commitment', 'Short-term (Days/Weeks)', 'Long-term (Months)', 'Flexible'] },
+          ].map((filter, idx) => (
+            <div key={idx}>
+              <label className="block text-sm font-medium text-gray-700 mb-2">{filter.label}</label>
+              <select className="w-full p-3 border border-gray-300 rounded-md shadow-sm">
+                {filter.options.map((option, i) => (
+                  <option key={i} value={option.toLowerCase()}>{option}</option>
+                ))}
+              </select>
+            </div>
+          ))}
         </div>
+      </motion.div>
+
+      {/* Volunteer Opportunities List */}
+      <div className="space-y-10">
+        {[{
+          title: 'Event Staff for Annual Gala',
+          desc: 'Help with setup, registration, and guest assistance at our major fundraising event.',
+          details: ['Type: Event Support', 'Location: On-site (City Hall)', 'Commitment: Short-term (1 day)', 'Date: June 15, 2025'],
+        }, {
+          title: 'Social Media Assistant (Remote)',
+          desc: 'Assist our communications team with creating and scheduling social media content.',
+          details: ['Type: Administrative', 'Location: Remote', 'Commitment: Long-term (3-5 hrs/week)'],
+        }, {
+          title: 'Community Garden Helper',
+          desc: 'Help maintain our community garden, including planting, weeding, and harvesting.',
+          details: ['Type: Field Work', 'Location: On-site (Community Center)', 'Commitment: Flexible (Weekends)'],
+        }].map((opportunity, idx) => (
+          <motion.div
+            key={idx}
+            className="border rounded-xl p-6 shadow-md flex flex-col md:flex-row justify-between items-start md:items-center bg-white hover:shadow-xl transition-shadow duration-500"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: idx * 0.2 }}
+          >
+            <div>
+              <h3 className="text-2xl font-semibold text-blue-900 mb-2">{opportunity.title}</h3>
+              <p className="text-gray-600 mb-3 max-w-2xl">{opportunity.desc}</p>
+              <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-500">
+                {opportunity.details.map((detail, i) => (
+                  <span key={i}>{detail}</span>
+                ))}
+              </div>
+            </div>
+            <div className="mt-5 md:mt-0 md:ml-4">
+              <button className="bg-blue-600 hover:bg-blue-700 transition duration-300 text-white px-6 py-2 rounded-full shadow-md">Sign Up</button>
+            </div>
+          </motion.div>
+        ))}
       </div>
-
-      {/* Volunteer Opportunities List - Placeholder */}
-      <div className="space-y-6">
-        {/* This will be populated with actual opportunity data from the backend */}
-        <div className="border rounded-lg p-6 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center">
-          <div>
-            <h3 className="text-xl font-semibold mb-1">Event Staff for Annual Gala</h3>
-            <p className="text-gray-600 mb-2">Help with setup, registration, and guest assistance at our major fundraising event.</p>
-            <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-500">
-              <span>Type: Event Support</span>
-              <span>Location: On-site (City Hall)</span>
-              <span>Commitment: Short-term (1 day)</span>
-              <span>Date: June 15, 2025</span>
-            </div>
-          </div>
-          <div className="mt-4 md:mt-0 md:ml-4">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded">Sign Up</button>
-          </div>
-        </div>
-
-        <div className="border rounded-lg p-6 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center">
-          <div>
-            <h3 className="text-xl font-semibold mb-1">Social Media Assistant (Remote)</h3>
-            <p className="text-gray-600 mb-2">Assist our communications team with creating and scheduling social media content.</p>
-            <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-500">
-              <span>Type: Administrative</span>
-              <span>Location: Remote</span>
-              <span>Commitment: Long-term (3-5 hrs/week)</span>
-            </div>
-          </div>
-          <div className="mt-4 md:mt-0 md:ml-4">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded">Sign Up</button>
-          </div>
-        </div>
-
-        <div className="border rounded-lg p-6 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center">
-          <div>
-            <h3 className="text-xl font-semibold mb-1">Community Garden Helper</h3>
-            <p className="text-gray-600 mb-2">Help maintain our community garden, including planting, weeding, and harvesting.</p>
-            <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-500">
-              <span>Type: Field Work</span>
-              <span>Location: On-site (Community Center)</span>
-              <span>Commitment: Flexible (Weekends)</span>
-            </div>
-          </div>
-          <div className="mt-4 md:mt-0 md:ml-4">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded">Sign Up</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    </motion.div>
   );
 };
 
 export default VolunteerPage;
-
