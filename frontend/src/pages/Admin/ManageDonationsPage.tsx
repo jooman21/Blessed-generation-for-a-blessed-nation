@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import  donationService from '../../services/donationService'
+import donationService from '../../services/donationService';
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Eye } from 'lucide-react'; // Icon for viewing details
@@ -34,7 +34,7 @@ const ManageDonationsPage: React.FC = () => {
     setError(null);
     try {
       // Assuming service includes related User/Project data
-      const response = await DonationService.getAllDonations({ page, limit, include: 'User,Project' }); 
+      const response = await (donationService as any).getAllDonations({ page, limit, include: 'User,Project' }); 
       setDonations(response.donations || []);
       setTotalPages(response.totalPages || 1);
       setTotalDonations(response.totalDonations || 0); // Assuming total count is returned

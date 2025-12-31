@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import teamService  from '../../services/teamService';
+import teamService from '../../services/teamService';
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -43,7 +43,7 @@ const ManageTeamMembersPage: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await TeamService.getAllTeamMembers({ page, limit });
+      const response = await (teamService as any).getAllTeamMembers({ page, limit });
       setTeamMembers(response.teamMembers || []);
       setTotalPages(response.totalPages || 1);
     } catch (err: any) {
@@ -76,10 +76,10 @@ const ManageTeamMembersPage: React.FC = () => {
         };
 
         if (editingMember) {
-          await TeamService.updateTeamMember(editingMember.id, memberData);
+          await (teamService as any).updateTeamMember(editingMember.id, memberData);
           alert('Team member updated successfully!');
         } else {
-          await TeamService.createTeamMember(memberData);
+          await (teamService as any).createTeamMember(memberData);
           alert('Team member created successfully!');
         }
         setIsDialogOpen(false);
@@ -115,7 +115,7 @@ const ManageTeamMembersPage: React.FC = () => {
   const handleDeleteMember = async (memberId: string) => {
     if (window.confirm('Are you sure you want to delete this team member?')) {
       try {
-        await TeamService.deleteTeamMember(memberId);
+        await (teamService as any).deleteTeamMember(memberId);
         alert('Team member deleted successfully.');
         fetchTeamMembers();
       } catch (err: any) {

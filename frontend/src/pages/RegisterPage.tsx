@@ -21,8 +21,8 @@ const RegisterPage: React.FC = () => {
     confirmPassword: '',
     role: 'donor' // Default role
   });
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  const [, setMessage] = useState('');
+  const [, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;

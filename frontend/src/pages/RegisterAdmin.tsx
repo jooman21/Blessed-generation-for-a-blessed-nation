@@ -21,8 +21,8 @@ const RegisterAdmin: React.FC = () => {
     confirmPassword: '',
     // Default role
   });
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  const [, setMessage] = useState('');
+  const [, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;

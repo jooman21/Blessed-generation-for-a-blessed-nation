@@ -22,7 +22,6 @@ import ManageTeamMembersPage from './pages/Admin/ManageTeamMembersPage';
 import ManageFAQsPage from './pages/Admin/ManageFAQsPage';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
-import ProtectedAdminRoute from './components/ProtectedRoute/ProtectedAdminRoute';
 import AdminLayout from './components/AdminLayout/AdminLayout';
 
 const AppContent = () => {

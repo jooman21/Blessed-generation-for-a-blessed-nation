@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import volunteerService from '../../services/volunteerService'
+import volunteerService from '../../services/volunteerService';
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -49,7 +49,7 @@ const ManageVolunteersPage: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await VolunteerService.getAllOpportunities({ page, limit });
+      const response = await (volunteerService as any).getAllOpportunities({ page, limit });
       setOpportunities(response.opportunities || []);
       setTotalPages(response.totalPages || 1);
     } catch (err: any) {
@@ -85,10 +85,10 @@ const ManageVolunteersPage: React.FC = () => {
         };
 
         if (editingOpportunity) {
-          await VolunteerService.updateOpportunity(editingOpportunity.id, opportunityData);
+          await (volunteerService as any).updateOpportunity(editingOpportunity.id, opportunityData);
           alert('Opportunity updated successfully!');
         } else {
-          await VolunteerService.createOpportunity(opportunityData);
+          await (volunteerService as any).createOpportunity(opportunityData);
           alert('Opportunity created successfully!');
         }
         setIsDialogOpen(false);
@@ -127,7 +127,7 @@ const ManageVolunteersPage: React.FC = () => {
   const handleDeleteOpportunity = async (opportunityId: string) => {
     if (window.confirm('Are you sure you want to delete this opportunity?')) {
       try {
-        await VolunteerService.deleteOpportunity(opportunityId);
+        await (volunteerService as any).deleteOpportunity(opportunityId);
         alert('Opportunity deleted successfully.');
         fetchOpportunities();
       } catch (err: any) {

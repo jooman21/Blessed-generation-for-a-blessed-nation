@@ -1,7 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 
-const fadeInUp = {
+const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   show: (i = 1) => ({
     opacity: 1,
@@ -9,7 +8,7 @@ const fadeInUp = {
     transition: {
       delay: i * 0.2,
       duration: 0.6,
-      ease: 'easeOut'
+      ease: 'easeOut' as const
     }
   })
 };

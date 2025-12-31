@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import  projectService  from '../../services/projectService'
+import projectService from '../../services/projectService';
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -48,7 +48,7 @@ const ManageProjectsPage: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await ProjectService.getAllProjects({ page, limit });
+      const response = await (projectService as any).getAllProjects({ page, limit });
       setProjects(response.projects || []);
       setTotalPages(response.totalPages || 1);
     } catch (err: any) {
@@ -85,11 +85,11 @@ const ManageProjectsPage: React.FC = () => {
 
         if (editingProject) {
           // Update existing project
-          await ProjectService.updateProject(editingProject.id, projectData);
+          await (projectService as any).updateProject(editingProject.id, projectData);
           alert('Project updated successfully!');
         } else {
           // Create new project
-          await ProjectService.createProject(projectData);
+          await (projectService as any).createProject(projectData);
           alert('Project created successfully!');
         }
         setIsDialogOpen(false);
@@ -127,7 +127,7 @@ const ManageProjectsPage: React.FC = () => {
   const handleDeleteProject = async (projectId: string) => {
     if (window.confirm('Are you sure you want to delete this project?')) {
       try {
-        await ProjectService.deleteProject(projectId);
+        await (projectService as any).deleteProject(projectId);
         alert('Project deleted successfully.');
         fetchProjects(); // Refresh the list
       } catch (err: any) {

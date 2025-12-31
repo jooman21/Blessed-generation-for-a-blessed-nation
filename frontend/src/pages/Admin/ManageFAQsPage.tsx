@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import  faqService  from '../../services/faqService';
+import faqService from '../../services/faqService';
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -41,7 +41,7 @@ const ManageFAQsPage: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await FAQService.getAllFAQs({ page, limit });
+      const response = await (faqService as any).getAllFAQs({ page, limit });
       setFaqs(response.faqs || []);
       setTotalPages(response.totalPages || 1);
     } catch (err: any) {
@@ -72,10 +72,10 @@ const ManageFAQsPage: React.FC = () => {
         };
 
         if (editingFAQ) {
-          await FAQService.updateFAQ(editingFAQ.id, faqData);
+          await (faqService as any).updateFAQ(editingFAQ.id, faqData);
           alert('FAQ updated successfully!');
         } else {
-          await FAQService.createFAQ(faqData);
+          await (faqService as any).createFAQ(faqData);
           alert('FAQ created successfully!');
         }
         setIsDialogOpen(false);
@@ -110,7 +110,7 @@ const ManageFAQsPage: React.FC = () => {
   const handleDeleteFAQ = async (faqId: string) => {
     if (window.confirm('Are you sure you want to delete this FAQ?')) {
       try {
-        await FAQService.deleteFAQ(faqId);
+        await (faqService as any).deleteFAQ(faqId);
         alert('FAQ deleted successfully.');
         fetchFAQs();
       } catch (err: any) {
