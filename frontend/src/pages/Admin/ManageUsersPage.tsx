@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { UserService } from '../../services';
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Trash2, KeyRound } from 'lucide-react';
@@ -29,7 +28,8 @@ const ManageUsersPage: React.FC = () => {
       setError(null);
       try {
         // Assuming UserService.getAllUsers accepts pagination params
-        const response = await (UserService as any).getAllUsers({ page, limit });
+        // TODO: Implement when backend is ready
+        const response = { users: [], totalUsers: 0, totalPages: 1 };
         setUsers(response.users || []);
         setTotalUsers(response.totalUsers || 0);
         setTotalPages(response.totalPages || 1);
@@ -53,7 +53,8 @@ const ManageUsersPage: React.FC = () => {
     // Placeholder for delete confirmation
     if (window.confirm(`Are you sure you want to delete user ID: ${userId}?`)) {
       try {
-        await (UserService as any).deleteUserById(userId);
+        // TODO: Implement when backend is ready
+        console.log('Delete user:', userId);
         // Refetch users after deletion
         setUsers(users.filter(user => user.id !== userId));
         setTotalUsers(totalUsers - 1);

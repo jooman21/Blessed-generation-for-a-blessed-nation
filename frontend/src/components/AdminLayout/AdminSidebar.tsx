@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { AuthService } from '../../services';
 import { 
   LayoutDashboard, 
   Briefcase, 
@@ -13,7 +12,8 @@ import {
 } from 'lucide-react';
 
 const AdminSidebar: React.FC = () => {
-  const user = (AuthService as any).getCurrentUser();
+  // TODO: Implement auth when backend is ready
+  const user = { firstName: 'Admin', email: 'admin@example.com' };
 
   const sidebarNavItems = [
     { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },

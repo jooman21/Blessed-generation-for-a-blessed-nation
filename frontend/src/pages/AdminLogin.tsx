@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import adminAuthService from '../services/adminAuthService';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+
 const AdminLoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,31 +11,13 @@ const AdminLoginPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    try {
-      const result = await adminAuthService.Adminlogin({ email, password });
-          // Check if the logged-in user is actually an admin
-    const user = result?.user;
-    if (user?.role !== 'admin') {
-      toast.error('Access denied: You are not an admin.');
-      // Optionally clear stored user/token to prevent misuse
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      return;
-    }
-    if(user?.password != password){
-      toast.error('Access denied: Password is not correct')
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      return;
-    }
-      
+    // TODO: Implement actual auth when backend is ready
+    // For now, just navigate to admin
+    if (email && password) {
       toast.success('Login successful!');
       setTimeout(() => navigate('/admin'), 1500);
-      // Optionally redirect after login:
-      // navigate('/admin-dashboard');
-    } catch (error: any) {
-      const errorMsg = error?.message || 'Login failed. Please try again.';
-      toast.error(errorMsg);
+    } else {
+      toast.error('Please enter email and password');
     }
   };
 

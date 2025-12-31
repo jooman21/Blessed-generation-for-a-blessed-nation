@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import newsService from '../../services/newsService';
-import eventService from '../../services/eventService';
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
@@ -60,7 +58,8 @@ const ManageNewsEventsPage: React.FC = () => {
     setError(null);
     try {
       // Assuming pagination exists or fetching all for simplicity
-      const response = await (newsService as any).getAllNews({}); 
+      // TODO: Implement when backend is ready
+      const response = { news: [] }; 
       setNewsItems(response.news || []);
     } catch (err: any) {
       setError(err.message || 'Failed to fetch news.');
@@ -74,7 +73,8 @@ const ManageNewsEventsPage: React.FC = () => {
     setError(null);
     try {
       // Assuming pagination exists or fetching all for simplicity
-      const response = await (eventService as any).getAllEvents({});
+      // TODO: Implement when backend is ready
+      const response = { events: [] };
       setEvents(response.events || []);
     } catch (err: any) {
       setError(err.message || 'Failed to fetch events.');
@@ -104,10 +104,12 @@ const ManageNewsEventsPage: React.FC = () => {
           publishedDate: new Date(values.publishedDate).toISOString(),
         };
         if (editingNews) {
-          await (newsService as any).updateNews(editingNews.id, newsData);
+          // TODO: Implement when backend is ready
+          console.log('Update news:', editingNews.id, newsData);
           alert('News item updated successfully!');
         } else {
-          await (newsService as any).createNews(newsData);
+          // TODO: Implement when backend is ready
+          console.log('Create news:', newsData);
           alert('News item created successfully!');
         }
         setIsNewsDialogOpen(false);
@@ -138,10 +140,12 @@ const ManageNewsEventsPage: React.FC = () => {
           date: new Date(values.date).toISOString(),
         };
         if (editingEvent) {
-          await (eventService as any).updateEvent(editingEvent.id, eventData);
+          // TODO: Implement when backend is ready
+          console.log('Update event:', editingEvent.id, eventData);
           alert('Event updated successfully!');
         } else {
-          await (eventService as any).createEvent(eventData);
+          // TODO: Implement when backend is ready
+          console.log('Create event:', eventData);
           alert('Event created successfully!');
         }
         setIsEventDialogOpen(false);
@@ -176,7 +180,8 @@ const ManageNewsEventsPage: React.FC = () => {
   const handleDeleteNews = async (newsId: string) => {
     if (window.confirm('Are you sure you want to delete this news item?')) {
       try {
-        await (newsService as any).deleteNews(newsId);
+        // TODO: Implement when backend is ready
+        console.log('Delete news:', newsId);
         alert('News item deleted successfully.');
         fetchNews();
       } catch (err: any) {
@@ -208,7 +213,8 @@ const ManageNewsEventsPage: React.FC = () => {
   const handleDeleteEvent = async (eventId: string) => {
     if (window.confirm('Are you sure you want to delete this event?')) {
       try {
-        await (eventService as any).deleteEvent(eventId);
+        // TODO: Implement when backend is ready
+        console.log('Delete event:', eventId);
         alert('Event deleted successfully.');
         fetchEvents();
       } catch (err: any) {

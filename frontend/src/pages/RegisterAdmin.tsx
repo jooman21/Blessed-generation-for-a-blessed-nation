@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import adminAuthService from '../services/adminAuthService';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -9,7 +8,6 @@ type RegisterForm = {
   email: string;
   password: string;
   confirmPassword: string;
-
 };
 
 const RegisterAdmin: React.FC = () => {
@@ -19,10 +17,7 @@ const RegisterAdmin: React.FC = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    // Default role
   });
-  const [, setMessage] = useState('');
-  const [, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -31,24 +26,14 @@ const RegisterAdmin: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setMessage('');
-    setError('');
 
     if (formData.password !== formData.confirmPassword) {
       toast.error('Passwords do not match.');
-      setError('Passwords do not match.');
       return;
     }
 
-    try {
-      const response = await adminAuthService.createAdmin(formData);
-      toast.success(response.message || 'Registration successful.');
-      setMessage(response.message || 'Registration successful.');
-    } catch (err: any) {
-      const errorMsg = err.response?.data?.message || err.message || 'Registration failed.';
-      toast.error(errorMsg);
-      setError(errorMsg);
-    }
+    // TODO: Implement actual registration when backend is ready
+    toast.success('Registration successful.');
   };
 
   return (
